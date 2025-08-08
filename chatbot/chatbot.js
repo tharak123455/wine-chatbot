@@ -1756,7 +1756,15 @@
                     throw new Error('Non autenticato - richiesto login');
                 }
 
-                const response = await fetch(customApiUrl, {
+                // Add language parameter to URL if it's the experiences endpoint
+                let finalUrl = customApiUrl;
+                if (customApiUrl.includes('api/winery/experiences')) {
+                    const separator = customApiUrl.includes('?') ? '&' : '?';
+                    const language = ChatbotConfig.current.language || 'it';
+                    finalUrl = `${customApiUrl}${separator}language=${language}`;
+                }
+
+                const response = await fetch(finalUrl, {
                     method: 'GET', // Assumendo GET per le API specifiche
                     headers: {
                         'Authorization': `Bearer ${this.token}`,

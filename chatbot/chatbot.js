@@ -1664,7 +1664,7 @@
                         'ngrok-skip-browser-warning': 'true'
                     },
                     body: JSON.stringify({
-                        clientId: 'discord'
+                        clientId: this.clientId
                     })
                 });
 
